@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAVA-SCRIPT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f5f5f5;
+            max-height: 100vh;
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .lights {
+            background-color: rgb(240, 38, 38);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .lights:hover {
+            background-color: rgb(248, 0, 0);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            background-color: rgb(228, 228, 41);
+            border: 0.5px solid black;
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgb(199, 199, 1);
+        }
+
+        .button:active {
+            background-color: rgb(255, 255, 120);
+        }
+
+        .readycont {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .ready {
+            background-color: rgb(28, 28, 207);
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .ready:hover {
+            background-color: rgb(0, 0, 150);
+        }
+
+        .ready:active {
+            background-color: rgb(107, 107, 255);
+        }
+
+        @media (max-width: 400px) {
+            .readycont {
+                gap: 20px;
+            }
+
+            .container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .lights {
+                width: 120px;
+                height: 120px;
+            }
+
+            .button {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        #b2 {
+            background-color: rgb(71, 71, 199);
+        }
+
+        #b2:hover {
+            background-color: rgb(24, 24, 197);
+        }
+
+        #b2:active {
+            background-color: rgb(117, 117, 247);
+        }
+
+        #b3 {
+            background-color: rgb(90, 221, 90);
+        }
+
+        #b3:hover {
+            background-color: rgb(30, 223, 30);
+        }
+
+        #b3:active {
+            background-color: rgb(146, 255, 146);
+        }
+
+        #sumbit {
+            background-color: rgb(49, 207, 28);
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        h1{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 46px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="h1">YOU LOSE!!!</h1>
+    <div class="main-wrapper" id="main">
+        <div class="container">
+            <div class="lights light1" id="1"></div>
+            <div class="lights light2" id="2"></div>
+            <div class="lights light3" id="3"></div>
+        </div>
+
+        <div class="readycont">
+            <button class="ready" id="ready">READY</button>
+            <button id="sumbit">SUMBIT</button>
+        </div>
+
+        <div class="buttons">
+            <button class="button button1" id="b1">YELLOW</button>
+            <button class="button button2" id="b2">BLUE</button>
+            <button class="button button3" id="b3">GREEN</button>
+        </div>
+    </div>
+
+
+    <script>
+        let y = 0;
+        let b = 0;
+        let g = 0;
+        let blue = false;
+        let green = false;
+        let yellow = false;
+        let lights1 = false;
+        let lights2 = false;
+        let lights3 = false;
+        let button1 = document.getElementById("b1");
+        let button2 = document.getElementById("b2");
+        let button3 = document.getElementById("b3");
+        let light1 = document.getElementById("1");
+        let light2 = document.getElementById("2");
+        let light3 = document.getElementById("3");
+        let ready = document.getElementById("ready");
+        let sumbit = document.getElementById("sumbit");
+        let startvalue = 0;
+        let random;
+        let order;
+        ready.onclick = function () {
+            y = 0;
+            b = 0;
+            g = 0;
+            blue = false;
+            green = false;
+            yellow = false;
+            lights1 = false;
+            lights2 = false;
+            lights3 = false;
+            startvalue = 1;
+            random = Math.floor(Math.random() * 3);
+            console.log(random);
+            if (startvalue == 1) {
+                if (random == 0) {
+                    order = 1;
+                    light1.style.backgroundColor = "green";
+                    light2.style.backgroundColor = "yellow";
+                    light3.style.backgroundColor = "blue";
+                    setTimeout(() => {
+                        light1.style.backgroundColor = "grey";
+                        light2.style.backgroundColor = "grey";
+                        light3.style.backgroundColor = "grey";
+                    }, 1000);
+                }
+                if (random == 1) {
+                    order = 2;
+                    light1.style.backgroundColor = "yellow";
+                    light2.style.backgroundColor = "blue";
+                    light3.style.backgroundColor = "green";
+                    setTimeout(() => {
+                        light1.style.backgroundColor = "grey";
+                        light2.style.backgroundColor = "grey";
+                        light3.style.backgroundColor = "grey";
+                    }, 1000);
+                }
+            }
+            if (random == 2) {
+                order = 3;
+                light1.style.backgroundColor = "blue";
+                light2.style.backgroundColor = "green";
+                light3.style.backgroundColor = "yellow";
+                setTimeout(() => {
+                    light1.style.backgroundColor = "grey";
+                    light2.style.backgroundColor = "grey";
+                    light3.style.backgroundColor = "grey";
+                }, 1000);
+            }
+        }
+        button1.onclick = function () {
+            if (yellow === false) {
+                if (lights1 === false) {
+                    light1.style.backgroundColor = "yellow";
+                    lights1 = true;
+                    yellow = true;
+                    y = 1;
+                }
+            }
+            if (yellow === false) {
+                if (lights2 === false) {
+                    light2.style.backgroundColor = "yellow";
+                    lights2 = true;
+                    yellow = true;
+                    y = 2;
+                }
+            }
+            if (yellow === false) {
+                if (lights3 === false) {
+                    light3.style.backgroundColor = "yellow";
+                    lights3 = true;
+                    yellow = true;
+                    y = 3;
+                }
+            }
+        }
+        button2.onclick = function () {
+
+            if (blue === false) {
+                if (lights1 === false) {
+                    light1.style.backgroundColor = "blue";
+                    lights1 = true;
+                    blue = true;
+                    b = 1;
+                }
+            }
+            if (blue === false) {
+                if (lights2 === false) {
+                    light2.style.backgroundColor = "blue";
+                    lights2 = true;
+                    blue = true;
+                    b = 2;
+                }
+            }
+            if (blue === false) {
+                if (lights3 === false) {
+                    light3.style.backgroundColor = "blue";
+                    lights3 = true;
+                    blue = true;
+                    b = 3;
+                }
+            }
+
+        }
+        button3.onclick = function () {
+            if (green === false) {
+                if (lights1 === false) {
+                    light1.style.backgroundColor = "green";
+                    lights1 = true;
+                    green = true;
+                    g = 1;
+                }
+            }
+            if (green === false) {
+                if (lights2 === false) {
+                    light2.style.backgroundColor = "green";
+                    lights2 = true;
+                    green = true;
+                    g = 2;
+                }
+            }
+            if (green === false) {
+                if (lights3 === false) {
+                    light3.style.backgroundColor = "green";
+                    lights3 = true;
+                    green = true;
+                    g = 3;
+                }
+            }
+        }
+
+        sumbit.onclick = function () {
+            if (order == 1) {
+                if (g == 1 & y == 2 & b == 3) {
+                    light1.style.backgroundColor = "green";
+                    light2.style.backgroundColor = "green";
+                    light3.style.backgroundColor = "green";
+                    document.getElementById("main").innerHTML = "";
+                    document.getElementById("h1").style.display = "block";
+                    document.getElementById("h1").textContent ="YOU WIN!!!";
+                }
+            }
+            else {
+                light1.style.backgroundColor = "red";
+                light2.style.backgroundColor = "red";
+                light3.style.backgroundColor = "red";
+                ready.textContent = "RETRY";
+                document.getElementById("h1").style.display = "block";
+                document.getElementById("main").innerHTML = "";
+            }
+            if (order == 2) {
+                if (y == 1 & b == 2 & g == 3) {
+                    light1.style.backgroundColor = "green";
+                    light2.style.backgroundColor = "green";
+                    light3.style.backgroundColor = "green";
+                    document.getElementById("main").innerHTML = "";
+                    document.getElementById("h1").style.display = "block";
+                    document.getElementById("h1").textContent ="YOU WIN!!!";
+                }
+            }
+            else {
+                light1.style.backgroundColor = "red";
+                light2.style.backgroundColor = "red";
+                light3.style.backgroundColor = "red";
+                ready.textContent = "RETRY";
+                document.getElementById("h1").style.display = "block";
+                document.getElementById("main").innerHTML = "";
+            }
+            if (order == 3) {
+                if (b == 1 & g == 2 & y == 3) {
+                    light1.style.backgroundColor = "green";
+                    light2.style.backgroundColor = "green";
+                    light3.style.backgroundColor = "green";
+                    document.getElementById("main").innerHTML = "";
+                    document.getElementById("h1").style.display = "block";
+                    document.getElementById("h1").textContent ="YOU WIN!!!";
+                }
+            }
+            else {
+                light1.style.backgroundColor = "red";
+                light2.style.backgroundColor = "red";
+                light3.style.backgroundColor = "red";
+                ready.textContent = "RETRY";
+                document.getElementById("h1").style.display = "block";
+                document.getElementById("main").innerHTML = "";
+            }
+            
+        }
+        
+    </script>
+</body>
+
+</html>
